@@ -22,7 +22,12 @@ r3pgn <- function(siteData,
 
   nMonths <- dim(climate)[1]
   noOfSites <- nrow(siteData)
-  nClimID <- dim(climate)[3]
+  if(!length(dim(climate))==2){
+    nClimID <- dim(climate)[3]}
+  else if(length(dim(climate))==2){
+  nClimID <- 1} else {
+    stop("Provided climate data array has something wrong with its dimensions")}
+
   totThinning <- sum(siteData$nThinning)
 
   if( all( is.null( thinning ) ) | totThinning == 0.) thinning = matrix(0,2,6)
